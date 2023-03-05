@@ -1,0 +1,29 @@
+.imgaboutus{
+    animation:animaboutus infinite 3s ease;
+}
+@keyframes animaboutus {
+    0%{
+        transform: translateY(0px);
+    }
+    50%{
+        transform: translateY(-20px);
+    }
+    100%{
+        transform: translateY(0px);
+    }
+}
+
+.boxaboutus{
+    animation:boxabout infinite 3s ease;
+}
+@keyframes boxabout {
+    0%{
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+    50%{
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.8);
+    }
+    100%{
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+}

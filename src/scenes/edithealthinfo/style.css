@@ -1,0 +1,8 @@
+.editform input{
+    color:white;
+    font-size: 1rem;
+}
+.editform .MuiOutlinedInput-root.Mui-focused ,.editform .MuiOutlinedInput-notchedOutline,
+.editform .MuiOutlinedInput-root{
+    border-color: rgb(82, 216, 189)!important;
+}

@@ -1,0 +1,77 @@
+
+
+/* header */
+.imganim header { 
+  display: grid; 
+  align-items: center;
+  width: min(60rem, 100%);
+  margin-inline: auto;
+}
+.imganim header :is(.orbits, .content){ grid-area: 1/1 }
+
+/* content */
+.imganim .content { place-self: center; text-align:center; max-width: 40ch; transform: translateY(269px);}
+.imganim .content > p:nth-of-type(1) { text-transform: uppercase; font-size: .8rem }
+.imganim .content > h1 { font-size: 2.5rem; font-weight: 800 }
+.imganim .content > h4 svg{ font-size: 3.5rem; font-weight: 800 }
+.imganim .content > h1 > span { color: hsl(350 100% 50%) }
+.imganim .content > p:nth-of-type(2){ font-size: 1.2rem }
+
+/* orbits */
+.imganim .orbits {  
+  --orbit-outer-size: 100%;
+  --orbit-inner-size: 75%;
+  --orbit-image-size: min(4vw, 3rem);
+  --orbit-ring-color: hsla(0, 3%, 23%, 0.75);
+  --orbit-ring-thickness: 1px;
+  --orbit-animation-duration: 10s;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  --mask-image: radial-gradient(circle at center, transparent 40%, black 50%);
+  -webkit-mask-image: var(--mask-image);
+  mask-image: var(--mask-image);
+  overflow: hidden;
+  z-index: -1;
+}
+.imganim .orbits :is(.left, .right, .outer, .inner) { display: grid; aspect-ratio: 1/1 }
+.imganim .orbits .left { place-items: center end }
+.imganim .orbits .right { place-items: center start }
+ 
+ .imganim .orbits :is(.outer, .inner){
+  grid-area: 1/1;
+  width: calc(var(--width) - var(--orbit-image-size));
+  border: var(--orbit-ring-thickness) solid var(--orbit-ring-color);
+  border-radius: 50%;
+  animation: orbit-rotate var(--orbit-animation-duration) linear infinite;
+}
+.imganim .orbits .outer { --width: var(--orbit-outer-size) }
+.imganim .orbits .inner { --width: var(--orbit-inner-size) }
+ 
+.imganim .orbits [data-orbit-rotate="left"] { --orbit-rotate-to: -360deg }
+.imganim .orbits [data-orbit-rotate="right"]{ --orbit-rotate-to:  360deg }
+
+.imganim .orbits img { 
+  grid-area: 1/1;
+  width: var(--orbit-image-size);
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  object-fit: cover;
+  --translate: translateX(var(--tx, 0)) translateY(var(--ty, 0));
+  transform: var(--translate);
+  animation: orbit-image-rotate var(--orbit-animation-duration) linear infinite;
+  place-self: var(--ps)
+}
+.imganim .orbits img:nth-child(1) { --ps: start center; --ty: -50% }
+.imganim .orbits img:nth-child(2) { --ps: center end  ; --tx:  50% }
+.imganim .orbits img:nth-child(3) { --ps: end center  ; --ty:  50% }
+.imganim .orbits img:nth-child(4) { --ps: center start; --tx: -50% }
+
+/* .orbits :is(.outer, .inner):hover,
+.orbits :is(.outer, .inner):hover img{
+  animation-play-state: paused;
+} */
+
+@keyframes orbit-rotate { to { transform: rotate(var(--orbit-rotate-to)) } }
+@keyframes orbit-image-rotate { to { transform: var(--translate) rotate(calc(var(--orbit-rotate-to) * -1)) } } 
+ 

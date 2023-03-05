@@ -1,0 +1,104 @@
+
+
+:root {
+  --container-height: 498px;
+}
+
+section.timeline {
+  position: relative;
+  padding-right: 50px;
+}
+
+.timeline .list {
+  max-height: var(--container-height);
+  border-radius: 15px;
+  scroll-snap-type: y mandatory;
+  overscroll-behavior-y: contain;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-timeline: listTimeline vertical;
+  margin-bottom: 15px;
+}
+
+.timeline .animation {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 100%;
+  background-size: 50px 40px;
+  /* background image on bottom of css for readability */
+}
+
+@supports (scroll-timeline: works) {
+  .timeline .animation {
+    animation: moveBackground 1s alternate linear;
+    animation-timeline: listTimeline;
+  }
+}
+
+@keyframes moveBackground {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 calc(var(--container-height) / -1);
+  }
+}
+.timeline h1{
+    text-align: center;
+    margin: 12px auto;
+    font-size: 2.3rem;
+}
+.timeline ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: rgba(238, 229, 229,0.7);
+  direction: rtl;
+}
+
+.timeline li {
+  direction: rtl!important;
+  padding: 20px;
+  border-top: 1px solid #ccc;
+  scroll-snap-align: start;
+  color: black;
+}
+
+.timeline li:first-child {
+  border: 0;
+}
+
+/* Demo styles */
+
+.timeline,
+.timeline ::before,
+.timeline ::after {
+  box-sizing: border-box;
+}
+
+
+
+
+
+/* width */
+.timeline ::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.timeline ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.timeline ::-webkit-scrollbar-thumb {
+  background: rgba(76, 104, 128,0.5);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.timeline ::-webkit-scrollbar-thumb:hover {
+  background: rgba(76, 104, 128,1);
+}

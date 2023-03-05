@@ -1,0 +1,19 @@
+.homeanim{
+    animation:homeanim infinite 3s ease;
+    transition: 0.3s ease;
+}
+@keyframes homeanim {
+    0%{
+        box-shadow:0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+    50%{
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 1);
+    }
+    100%{
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+}
+
+.homeanim:hover{
+    transform: translateY(-5px);
+}

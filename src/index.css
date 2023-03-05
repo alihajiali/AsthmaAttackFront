@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap");
+
+@font-face {
+  font-family: "BYekan";
+  src: url("./assets/fonts/BYekan-webfont.eot") format("eot"),
+      url("./assets/fonts/BYekan-webfont.woff") format("woff"),
+      url("./assets/fonts/BYekan-webfont.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+html,
+body,
+#root,
+.app,
+.content {
+  height: 100vh!important;
+  width: 100%;
+  font-family: "BYekan";
+}
+.content{
+  overflow:auto!important;
+}
+
+.app {
+  display: flex;
+  position: relative;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e0e0e0;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

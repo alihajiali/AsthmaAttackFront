@@ -1,0 +1,258 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.contlogin {
+  background-image: url("../../../assets/img/bg.jpg");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  font-family: "BYekan";
+}
+
+.contlogin div.MainContainer{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content:space-around;
+  height: 70vh;
+  width: 30vw;
+  background: rgba(108, 171, 212, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8.5px);
+  -webkit-backdrop-filter: blur(8.5px);
+  border-radius: 10px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+.signin{
+  height: 60vh!important;
+}
+
+.contlogin a{
+  color: rgb(23, 98, 130);
+  font-weight: bold;
+}
+.contlogin h2.WelcomeText{
+  color:rgb(23, 98, 130);
+  font-size: 1.5rem!important;
+}
+
+.contlogin form{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 70%;
+  width: 100%;
+}
+.signin form{
+  height: 70%;
+}
+.contlogin div.ButtonContainer {
+  margin: 3rem 0 2rem 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contlogin h5.LoginWith{
+  cursor: pointer;
+}
+.contlogin hr.HorizontalRule {
+width: 90%;
+height: 0.3rem;
+border-radius: 0.8rem;
+border: none;
+background: linear-gradient(to right, #14163c 0%, #03217b 79%);
+background-color: #ebd0d0;
+margin: 1.5rem 0 1rem 0;
+backdrop-filter: blur(25px);
+}
+
+.contlogin div.IconsContainer{
+display: flex;
+justify-content: space-evenly;
+margin: 2rem 0 3rem 0;
+width: 80%;
+}
+.contlogin h4.ForgotPassword {
+ cursor: pointer;
+}
+.contlogin button{
+  background: rgb(23, 98, 130);
+  text-transform: uppercase;
+  width: 65%;
+  height: 3rem;
+  border: 2px solid rgb(23, 98, 130);
+  font-size:15px;
+  color: white;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition:0.2s ease;
+  font-family:"BYekan";
+  font-weight:400;
+}
+.contlogin button:hover{
+    background: none ;
+    border:2px solid rgb(23, 98, 130);
+    color:rgb(23, 98, 130);
+}
+
+.contlogin input {
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 32px 0 rgba(23, 98, 130, 0.57);
+  border-radius: 2rem;
+  width: 80%;
+  height: 2.5rem;
+  padding: .7rem;
+  border: none;
+  outline: none;
+  color: rgba(23, 98, 130,0.8);
+  font-family:"BYekan";
+  font-size: 1rem;
+  font-weight: bold;
+}
+.contlogin input:focus {
+    display: inline-block;
+    background:rgba(255, 255, 255, 0.75);
+    border-radius: 2rem;
+}
+.contlogin input::placeholder {
+    color: rgba(23, 98, 130,0.5);
+    font-weight: 100;
+    font-size: 1rem;
+  }
+
+  
+  
+.error-msg{
+  color: crimson;
+  text-align: right;
+  width: 80%;
+  height: 2.5rem;
+  padding-right: 10px;
+  position: relative;
+}
+@media only screen and (max-width: 320px) {
+  .contlogin div.MainContainer{
+    width: 80vw;
+    height: 80vh;
+    }
+    .contlogin div.MainContainer hr {
+      margin-bottom: 0.3rem;
+    }
+    .contlogin div.MainContainer h4 {
+      font-size: small;
+    }
+
+}
+
+
+
+
+
+.level{
+  color:rgb(23, 98, 130);
+}
+
+.wrapper{
+  display: inline-flex;
+  background:none;
+  height: 40px;
+  width: 80%;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+  margin: 10px 0px;
+}
+.wrapper .option{
+  background: #fff;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin:0px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0 10px;
+  border: 2px solid lightgrey;
+  transition: all 0.3s ease;
+}
+.wrapper .option .dot{
+  height: 20px;
+  width: 20px;
+  background: #d9d9d9;
+  border-radius: 50%;
+  position: relative;
+}
+.wrapper .option .dot::before{
+  position: absolute;
+  content: "";
+  top: 4px;
+  left: 4px;
+  width: 12px;
+  height: 12px;
+  background: rgb(23, 98, 130);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(1.5);
+  transition: all 0.3s ease;
+}
+input[type="radio"]{
+  display: none;
+}
+#option-1:checked:checked ~ .option-1,
+#option-2:checked:checked ~ .option-2{
+  border-color: rgb(23, 98, 130);
+  background: rgb(23, 98, 130);
+}
+#option-1:checked:checked ~ .option-1 .dot,
+#option-2:checked:checked ~ .option-2 .dot{
+  background: #fff;
+}
+#option-1:checked:checked ~ .option-1 .dot::before,
+#option-2:checked:checked ~ .option-2 .dot::before{
+  opacity: 1;
+  transform: scale(1);
+}
+.wrapper .option span{
+  font-size: 0.9rem;
+  color: #808080;
+}
+#option-1:checked:checked ~ .option-1 span,
+#option-2:checked:checked ~ .option-2 span{
+  color: #fff;
+}
+@media only screen and (min-width: 411px) {
+  .contlogin div.MainContainer{
+    width: 80vw;
+    height: 70vh;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .contlogin div.MainContainer{
+    width: 80vw;
+    height: 70vh;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .contlogin div.MainContainer{
+    width: 70vw;
+   height: 55vh;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .contlogin div.MainContainer{
+  width: 30vw;
+  height: 70vh;
+ }
+}

@@ -1,0 +1,23 @@
+
+.info .subinfo{
+    border:  1px solid rgba(192, 187, 187,0.5);
+    text-align: center;
+    border-radius: 4px;
+    padding: 10px 0px;
+    margin: 4px 0px;
+    direction: rtl;
+   display: flex !important;
+   align-items: center;
+   justify-content: space-around;
+   font-size: 1.2rem;
+}
+
+.info .subinfo:hover , .info .subinfo:active{
+    border:  1px solid rgba(192, 187, 187,0.9);
+}
+.info .title{
+    color:rgb(82, 216, 189)!important;
+}
+.form1 form input{
+    font-size: 1.2rem!important;
+}
