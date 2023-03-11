@@ -234,6 +234,15 @@ export default function PrimarySearchAppBar() {
           >
             سلامتجو
           </Typography>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{mx:2}}
+            onClick={()=>{localStorage.clear()}}
+          >
+            خروج
+          </Typography>
           {/* <Search>
             <SearchIconWrapper>
               <SearchIcon />

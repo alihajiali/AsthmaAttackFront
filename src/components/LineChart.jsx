@@ -1,11 +1,28 @@
 import { ResponsiveLine } from "@nivo/line";
 import { useTheme } from "@mui/material";
+import axios from 'axios';
 import { tokens } from "../theme";
-import { mockLineData as data } from "../data/mockData";
+import { useEffect, useState } from "react";
+// import { mockLineData as data } from "../data/mockData";
 
 const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+
+  const [data, setData] = useState([]);
+  console.log(data)
+
+  let config = {
+    headers: {
+      "Authorization" : `Bearer ${localStorage.getItem("token")}`
+    }
+  }
+
+  axios.get(`http://185.142.156.246:8081/asthma_data?user_id=${localStorage.getItem("user_id")}`, config)
+    .then((response) => {
+      setData(response.data);
+    });
 
   return (
     <ResponsiveLine

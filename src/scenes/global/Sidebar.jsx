@@ -82,7 +82,7 @@ const Sidebar = () => {
                 ml="15px"
               >
                 <Typography variant="h3" color={colors.grey[100]}>
-                  ادمین
+                  {localStorage.getItem("user_type")}
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -109,23 +109,23 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 5px 0" }}
                 >
-                     مهناز کریمی
+                     {localStorage.getItem("username")}
                 </Typography>
-                <Typography variant="h5" color={colors.greenAccent[500]}>
+                {/* <Typography variant="h5" color={colors.greenAccent[500]}>
                   مدیر سایت
-                </Typography>
+                </Typography> */}
               </Box>
             </Box>
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <Item
+            {/* <Item
               title="داشبورد"
               to="/dashboard"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
             <Item
               title="پروفایل"
               to="/dashboard/setingprofile"
@@ -141,7 +141,7 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="داروی مصرفی"
+              title="ورود اطلاعات"
               to="/dashboard/medicin"
               icon={<VaccinesIcon />}
               selected={selected}
@@ -154,20 +154,20 @@ const Sidebar = () => {
             >
               داده ها
             </Typography>
-            <Item
+            {/* <Item
               title="مدیریت کاربران"
               to="/dashboard/team"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
-            <Item
+            /> */}
+            {/* <Item
               title="اطلاعات تماس"
               to="/dashboard/contacts"
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
             <Item
               title="لیست سلامت جویان"
               to="/dashboard/invoices"
@@ -190,13 +190,13 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
+            {/* <Item
               title="تقویم"
               to="/dashboard/calendar"
               icon={<CalendarTodayOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
             <Item
               title="صفحه پرسش و پاسخ"
               to="/dashboard/faq"
@@ -219,27 +219,27 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
+            {/* <Item
               title="نمودار پای"
               to="/dashboard/pie"
               icon={<PieChartOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
-            <Item
+            /> */}
+            {/* <Item
               title="نمودار خطی"
               to="/dashboard/line"
               icon={<TimelineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
-            <Item
+            /> */}
+            {/* <Item
               title="نمودار جغرافیایی"
               to="/dashboard/geography"
               icon={<MapOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
           </Box>
         </Menu>
       </ProSidebar>

@@ -3,21 +3,30 @@ import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockDataInvoices } from "../../data/mockData";
 import Header from "../../components/Header";
+import {useNavigate , Link} from "react-router-dom"
+import axios from 'axios';
+import { useEffect, useState } from "react";
+import "./style.css";
+
 
 const Invoices = () => {
+  const [data, setData] = useState([]);
+  const [getData, setGetData] = useState(true);
+
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const columns = [
     { field: "id", headerName: "ایدی" },
     {
-      field: "name",
-      headerName: "نام",
+      field: "username",
+      headerName: "نام کاربری",
       flex: 1,
       cellClassName: "name-column--cell",
     },
     {
-      field: "phone",
-      headerName: "شماره تلفن",
+      field: "phone_number",
+      headerName: "شماره موبایل",
       flex: 1,
     },
     {
@@ -26,14 +35,9 @@ const Invoices = () => {
       flex: 1,
     },
     {
-      field: "cost",
-      headerName: "مبلغ",
+      field: "doctors",
+      headerName: "نام پزشکان",
       flex: 1,
-      renderCell: (params) => (
-        <Typography color={colors.greenAccent[500]}>
-          ${params.row.cost}
-        </Typography>
-      ),
     },
     {
       field: "date",
@@ -42,10 +46,36 @@ const Invoices = () => {
     },
   ];
 
+
+
+
+  const GetData = () => {
+
+    let config = {
+      headers: {
+        "Authorization" : `Bearer ${localStorage.getItem("token")}`
+      }
+    }
+
+
+    axios.get(`http://185.142.156.246:8081/user/?filter_bimar=${localStorage.getItem("username")}`, config)
+    .then((response) => {
+      setData(response.data.users);
+    });
+  }
+
+  useEffect(() => {
+    if (getData){
+      setGetData(false)
+      GetData()
+    }
+  });
+
+
   return (
     <Box m="20px">
       <Box  sx={{direction:"rtl"}}>
-      <Header title="فاکتورها" subtitle="لیست موجودی فاکتورها" />
+      <Header title="لیست سلامت جوبان" subtitle="لیست سلامت جوبانی که پرشک آنها شما هستید" />
       </Box>
       <Box
         m="40px 0 0 0"
@@ -76,7 +106,41 @@ const Invoices = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={mockDataInvoices} columns={columns} />
+        {/* <DataGrid checkboxSelection rows={mockDataInvoices} columns={columns} /> */}
+
+
+
+
+
+        <table>
+          <tr>
+            <th>نام کاربری</th>
+            <th>نام و نام خانوادگی</th>
+            <th>شماره موبایل</th>
+            <th>ایمیل</th>
+            <th>نام پزشکان</th>
+            <th>مشاهده نمودار</th>
+          </tr>
+
+            {data.map((item, i)=>{
+              return (
+                <tr>
+                  <td>{item?._source?.username}</td>
+                  <td>{item?._source?.fullname}</td>
+                  <td>{item?._source?.phone_number}</td>
+                  <td>{item?._source?.email}</td>
+                  <td>{item?._source?.doctors[0]}</td>
+                  <Link to="/dashboard/bar"> 
+                    <td><button class="button button2" onClick={() => {localStorage.setItem("doctor_filter_bimar", item?._id)}}>مشاهده نمودار</button></td>
+                  </Link>
+                </tr>
+              )
+            })}
+
+        </table>
+
+
+
       </Box>
     </Box>
   );

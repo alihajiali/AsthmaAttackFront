@@ -2,15 +2,30 @@ import React, { useState } from 'react';
 import { TextField, Button ,Box ,Grid} from '@mui/material';
 import img1 from "../../assets/img/icons img2/m7.png"
 import Header from "../../components/Header";
-import "./style.css"
+import axios from 'axios';
+import "./style.css";
 const MedicalPage = () => {
   const [name, setName] = useState('');
   const [peakFlow, setPeakFlow] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Do something with the form data
-    console.log(`Name: ${name}, Peak Flow: ${peakFlow}`);
+
+    let config = {
+      headers: {
+        "Authorization" : `Bearer ${localStorage.getItem("token")}`
+      }
+    }
+    
+    axios.post("http://185.142.156.246:8081/asthma_data", {
+      medicine: name,
+      have_medicine: name===""?false:true, 
+      percent: parseFloat(peakFlow), 
+      user_id:localStorage.getItem("user_id")
+    }, config)
+    .then((response) => {
+      
+    });
   };
 
   return (
@@ -45,7 +60,6 @@ const MedicalPage = () => {
                         },
                     },
                     }}
-                    required
                   />
                   <TextField
                     id="peak-flow"

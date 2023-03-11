@@ -1,13 +1,59 @@
 import { useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 import { tokens } from "../theme";
-import { mockBarData as data } from "../data/mockData";
+// import { mockBarData as data } from "../data/mockData";
+import { setUser } from "../actions/user";
+import { useEffect, useState } from "react";
+import axios from 'axios';
 
 const BarChart = ({ isDashboard = false }) => {
+  const [user_id, setUserId] = useState("");
+  const [getData, setGetData] = useState(true);
+  const [data, setData] = useState([]);
+  const [medicineData, setMedicineData] = useState([]);
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+
+  const GetData = () => {
+    let config = {
+      headers: {
+        "Authorization" : `Bearer ${localStorage.getItem("token")}`
+      }
+    }
+
+    if (localStorage.getItem("doctor_filter_bimar") !== null){
+      axios.get(`http://185.142.156.246:8081/asthma_data?user_id=${localStorage.getItem("doctor_filter_bimar")}`, config)
+        .then((response) => {
+          setData(response.data?.response);
+        });
+        axios.get(`http://185.142.156.246:8081/asthma_data?user_id=${localStorage.getItem("doctor_filter_bimar")}&medicine=true`, config)
+        .then((response) => {
+          setMedicineData(response.data?.response);
+        });
+    }else{
+      axios.get(`http://185.142.156.246:8081/asthma_data?user_id=${localStorage.getItem("user_id")}`, config)
+      .then((response) => {
+        setData(response.data?.response);
+      });
+      axios.get(`http://185.142.156.246:8081/asthma_data?user_id=${localStorage.getItem("user_id  ")}&medicine=true`, config)
+      .then((response) => {
+        setMedicineData(response.data?.response);
+      });
+    }
+
+  }
+
+  useEffect(() => {
+    if (getData){
+      setGetData(false)
+      GetData()
+    }
+  });
+
   return (
+    <>
     <ResponsiveBar
       data={data}
       theme={{
@@ -39,8 +85,8 @@ const BarChart = ({ isDashboard = false }) => {
           },
         },
       }}
-      keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
-      indexBy="country"
+      keys={["pick_flow"]}
+      indexBy="date"
       margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
       padding={0.3}
       valueScale={{ type: "linear" }}
@@ -76,7 +122,7 @@ const BarChart = ({ isDashboard = false }) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard ? undefined : "country", // changed
+        legend: isDashboard ? undefined : "datetime", // changed
         legendPosition: "middle",
         legendOffset: 32,
       }}
@@ -84,7 +130,7 @@ const BarChart = ({ isDashboard = false }) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard ? undefined : "food", // changed
+        legend: isDashboard ? undefined : "pick_flow", // changed
         legendPosition: "middle",
         legendOffset: -40,
       }}
@@ -124,6 +170,26 @@ const BarChart = ({ isDashboard = false }) => {
         return e.id + ": " + e.formattedValue + " in country: " + e.indexValue;
       }}
     />
+
+
+
+    <table>
+          <tr>
+            <th>تاریخ</th>
+            <th>اسم دارو</th>
+          </tr>
+
+            {medicineData.map((item, i)=>{
+              return (
+                <tr>
+                  <td>{item?.date}</td>
+                  <td>{item?.medicine}</td>
+                </tr>
+              )
+            })}
+
+        </table>
+      </>
   );
 };
 

@@ -26,6 +26,9 @@ function Login() {
     })
     .then((response) => {
       localStorage.setItem("token", response.data.access);
+      localStorage.setItem("user_id", response.data.user_id);
+      localStorage.setItem("user_type", userType);
+      localStorage.setItem("username", username);
     });
   }
 
@@ -74,9 +77,9 @@ function Login() {
 
             <div className="level" >نوع ورود خود را انتخاب کنید:</div>
             <div className="wrapper">
-            <input type="radio" name="select" id="option-1" value="health" onChange={(e)=>setUserType(e.target.value)}  />
+            <input type="radio" name="select" id="option-1" value="سلامت جو" onChange={(e)=>setUserType(e.target.value)}  />
             {/* formik.values.select = e.target.value */}
-            <input type="radio" name="select" id="option-2"  value="doctor" onChange={(e)=>setUserType(e.target.value)}/>
+            <input type="radio" name="select" id="option-2"  value="پزشک" onChange={(e)=>setUserType(e.target.value)}/>
             {/* formik.values.select = e.target.value */}
             <label htmlFor="option-1" className="option option-1">
                 <div className="dot"></div>
@@ -91,8 +94,9 @@ function Login() {
              <div className="error-msg">{formik.errors.select}</div>
            ) : <div className="error-msg"></div>}
                 
-           
-           <button type="submit" onClick={()=>SendLogin()}>ثبت اطلاعات</button>
+            <Link to="/"> 
+              <button type="submit" style={{width:"200%"}} onClick={()=>{SendLogin()}}>ورود</button>
+            </Link>
          </form>
        )}
      </Formik>
