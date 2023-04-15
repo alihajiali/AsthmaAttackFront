@@ -75,7 +75,7 @@ const Invoices = () => {
   return (
     <Box m="20px">
       <Box  sx={{direction:"rtl"}}>
-      <Header title="لیست سلامت جوبان" subtitle="لیست سلامت جوبانی که پرشک آنها شما هستید" />
+      <Header title="لیست سلامت جویان" subtitle="لیست سلامت جویانی که پرشک آنها شما هستید" />
       </Box>
       <Box
         m="40px 0 0 0"
@@ -118,21 +118,21 @@ const Invoices = () => {
             <th>نام و نام خانوادگی</th>
             <th>شماره موبایل</th>
             <th>ایمیل</th>
-            <th>نام پزشکان</th>
+            <th>کد پزشک</th>
             <th>مشاهده نمودار</th>
+            <th>مشاهده پرونده</th>
           </tr>
 
             {data.map((item, i)=>{
               return (
                 <tr>
                   <td>{item?._source?.username}</td>
-                  <td>{item?._source?.fullname}</td>
+                  <td>{item?._source?.full_name}</td>
                   <td>{item?._source?.phone_number}</td>
                   <td>{item?._source?.email}</td>
                   <td>{item?._source?.doctors[0]}</td>
-                  <Link to="/dashboard/bar"> 
-                    <td><button class="button button2" onClick={() => {localStorage.setItem("doctor_filter_bimar", item?._id)}}>مشاهده نمودار</button></td>
-                  </Link>
+                  <td><Link to="/dashboard/bar"><button class="button button2" onClick={() => {localStorage.setItem("doctor_filter_bimar", item?._id)}}>نمودار</button></Link></td>
+                  <td><Link to="/dashboard/healthinfo"><button class="button button2" onClick={() => {localStorage.setItem("doctor_filter_bimar", item?._id)}}>پرونده پزشکی</button></Link></td>
                 </tr>
               )
             })}

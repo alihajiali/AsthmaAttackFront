@@ -22,12 +22,12 @@ const Topbar = () => {
         display="flex"
         backgroundColor={colors.primary[400]}
         borderRadius="3px"
-        sx={{direction:"rtl" ,px:1}}
+        sx={{direction:"rtl" ,px:0}}
       >
-        <InputBase sx={{ ml: 2, flex: 1 }} placeholder="جست و جو" />
+        {/* <InputBase sx={{ ml: 2, flex: 1 }} placeholder="جست و جو" />
         <IconButton type="button" sx={{ p: 1 }}>
           <SearchIcon />
-        </IconButton>
+        </IconButton> */}
       </Box>
 
       {/* ICONS */}

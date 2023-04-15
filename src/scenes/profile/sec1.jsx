@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Avatar,
   Button,
@@ -7,12 +7,41 @@ import {
   Typography,
   Box
 } from "@mui/material";
+import axios from 'axios';
 
 const Profile = () => {
+  const [getData, setGetData] = useState(true)
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [phoneNumber, setPhoneNumber] = useState("")
+
+  const GetData = () => {
+    let config = {
+      headers: {
+        "Authorization" : `Bearer ${localStorage.getItem("token")}`
+      }
+    }
+
+    axios.get(`http://185.142.156.246:8081/user/?username=${localStorage.getItem("username")}`, config)
+    .then((response) => {
+      setName(response.data.users[0]._source.full_name)
+      setEmail(response.data.users[0]._source.email)
+      setPhoneNumber(response.data.users[0]._source.phone_number)
+
+    });
+  }
+  useEffect(() => {
+    if (getData){
+      setGetData(false)
+      GetData()
+    }
+  });
+
+
   const [formData, setFormData] = useState({
-    name: "مهناز کریمی",
-    email: "johndoe@example.com",
-    phoneNumber: "555-1234",
+    // name: "مهناز کریمی",
+    // email: "johndoe@example.com",
+    // phoneNumber: "555-1234",
     avatarUrl:require("../../assets/img/2.jpg"),
   });
 
@@ -41,10 +70,10 @@ const Profile = () => {
       <Grid item xs={12} sm={8} className="info">
       <Box sx={{direction:"rtl"}}>
       <Typography className="subinfo" variant="h4" sx={{color:"rgb(82, 216, 189)"}}>اطلاعات کاربر</Typography>
-        <Typography className="subinfo" variant="subtitle1"><span className="title">نام : </span><span className="valtitle">{formData.name}</span> </Typography>
-        <Typography className="subinfo" variant="subtitle1"><span className="title">ایمیل : </span><span className="valtitle">{formData.email}</span> </Typography>
+        <Typography className="subinfo" variant="subtitle1"><span className="title">نام : </span><span className="valtitle">{name}</span> </Typography>
+        <Typography className="subinfo" variant="subtitle1"><span className="title">ایمیل : </span><span className="valtitle">{email}</span> </Typography>
         <Typography className="subinfo" variant="subtitle1">
-        <span className="title"> شماره تماس : </span><span className="valtitle">{formData.phoneNumber}</span>
+        <span className="title"> شماره تماس : </span><span className="valtitle">{phoneNumber}</span>
         </Typography>
       </Box>
       </Grid>
@@ -59,7 +88,7 @@ const Profile = () => {
               <TextField
                 label="نام کاربری"
                 name="name"
-                value={formData.name}
+                value={name}
                 onChange={handleChange}
                 fullWidth
                 required
@@ -70,7 +99,7 @@ const Profile = () => {
                 label="ایمیل"
                 name="email"
                 type="email"
-                value={formData.email}
+                value={email}
                 onChange={handleChange}
                 fullWidth
                 required
@@ -80,7 +109,7 @@ const Profile = () => {
               <TextField
                 label="شماره تماس"
                 name="phoneNumber"
-                value={formData.phoneNumber}
+                value={phoneNumber}
                 onChange={handleChange}
                 fullWidth
                 required

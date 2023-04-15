@@ -42,6 +42,9 @@ const Sidebar = () => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  if (selected === "نمودار بار" || selected ==="پرونده پزشکی"){
+    localStorage.setItem("doctor_filter_bimar", localStorage.getItem("user_id"))
+  }
 
   return (
     <Box
@@ -147,27 +150,16 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Typography
+            {
+              localStorage.getItem("user_type") === "پزشک" ?
+              <>
+              <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
               داده ها
             </Typography>
-            {/* <Item
-              title="مدیریت کاربران"
-              to="/dashboard/team"
-              icon={<PeopleOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            /> */}
-            {/* <Item
-              title="اطلاعات تماس"
-              to="/dashboard/contacts"
-              icon={<ContactsOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            /> */}
             <Item
               title="لیست سلامت جویان"
               to="/dashboard/invoices"
@@ -175,6 +167,9 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+              </>:
+              <></>
+            }
 
             <Typography
               variant="h6"
